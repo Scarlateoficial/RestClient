@@ -5,15 +5,32 @@ RestClient :: RestClient(String server, int port){
     serverPort = port;
 }
 
+bool RestClient :: begin(){
+    WiFi.begin(ssid, pass);
+    Serial.println("\n[Connecting] [");
+    while (WiFi.status() != WL_CONNECTED){
+        delay(500);
+        Serial.println("-");
+    }
+
+    Serial.println("");                         //conexão realizada
+    Serial.print("[ INFO ] Conectado a: ");
+    Serial.println(ssid);
+    Serial.print("[ INFO ] Endereço IP: ");
+    Serial.println(WiFi.localIP());
+    Serial.println(WiFi.macAddress());
+    return WiFi.status();
+}
+
 String RestClient :: get(String path){
     String getBody;
-    if (espClient.connect(serverName.c_str(), serverPort)) {
+    if (client.connect(serverName.c_str(), serverPort)) {
         Serial.println("[ INFO ] Conectado a API");
         //Faz uma requisição HTTP
-        espClient.println("GET "+serverPath+" HTTP/1.1");
-        espClient.println("Host: "+serverName);
-        espClient.println(Header);
-        espClient.println();
+        client.println("GET "+serverPath+" HTTP/1.1");
+        client.println("Host: "+serverName);
+        client.println(Header);
+        client.println();
 
         int timoutTimer = 10000;
         long startTimer = millis();
@@ -23,8 +40,8 @@ String RestClient :: get(String path){
         while ((startTimer + timoutTimer) > millis()) {
             Serial.print(".");
             delay(100);      
-            while (espClient.available()) {
-                char c = espClient.read();
+            while (client.available()) {
+                char c = client.read();
                 if (c == '\n') {
                     if (getAll.length()==0) state=true;
                     getAll = "";
@@ -37,7 +54,7 @@ String RestClient :: get(String path){
             if (getBody.length()>0) break;
         }
 
-        espClient.stop();
+        client.stop();
         return getBody;
     } else {
         Serial.println("[ INFO ] Erro ao se conectar com a API."); //Caso não seja possível obter uma conexao
