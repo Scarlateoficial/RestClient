@@ -10,12 +10,12 @@ class RestClient{
         bool begin(String ssid, String pass);
         void set_header(String nHeader);
         void set_server(String server, int port);
-        get(String path);
-        post(String path);
+        String get(String path);
+        String post(String path);
     private:
         String serverName, serverPath, Header = "", ssid, pass;
         int serverPort;
-        WifiClient client;
+        WiFiClient client;
 };
 
 #endif
