@@ -5,7 +5,7 @@ RestClient :: RestClient(String server, int port){
     serverPort = port;
 }
 
-bool RestClient :: begin(){
+void RestClient :: begin(){
     WiFi.begin(ssid, pass);
     Serial.println("\n[Connecting] [");
     while (WiFi.status() != WL_CONNECTED){

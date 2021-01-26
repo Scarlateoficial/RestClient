@@ -7,7 +7,7 @@
 class RestClient{
     public:
         RestClient(String server, int port);
-        bool begin(String ssid, String pass);
+        void begin(String ssid, String pass);
         void set_header(String nHeader);
         void set_server(String server, int port);
         String get(String path);
