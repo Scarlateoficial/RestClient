@@ -5,22 +5,6 @@ RestClient :: RestClient(String server, int port){
     serverPort = port;
 }
 
-int RestClient :: begin(String ssid, String pass){
-    WiFi.begin(ssid.c_str(), pass.c_str());
-    Serial.println("\n[Connecting] [");
-    while (WiFi.status() != WL_CONNECTED){
-        delay(500);
-        Serial.println("-");
-    }
-
-    Serial.println("");                         //conexão realizada
-    Serial.print("[ INFO ] Conectado a: ");
-    Serial.println(ssid);
-    Serial.print("[ INFO ] Endereço IP: ");
-    Serial.println(WiFi.localIP());
-    Serial.println(WiFi.macAddress());
-    return WiFi.status();
-}
 
 String RestClient :: get(String path){
     String getBody;
