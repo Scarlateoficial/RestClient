@@ -27,7 +27,7 @@ String RestClient :: get(String path){
     if (client.connect(serverName.c_str(), serverPort)) {
         Serial.println("[ INFO ] Conectado a API");
         //Faz uma requisição HTTP
-        client.println("GET "+serverPath+" HTTP/1.1");
+        client.println("GET "+path+" HTTP/1.1");
         client.println("Host: "+serverName);
         client.println(Header);
         client.println();
