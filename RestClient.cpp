@@ -5,7 +5,7 @@ RestClient :: RestClient(String server, int port){
     serverPort = port;
 }
 
-void RestClient :: begin(String ssid, String pass){
+int RestClient :: begin(String ssid, String pass){
     WiFi.begin(ssid.c_str(), pass.c_str());
     Serial.println("\n[Connecting] [");
     while (WiFi.status() != WL_CONNECTED){
@@ -66,7 +66,7 @@ String RestClient :: post(String path){
 
 }
 
-void RestClient:: st_header(String nHeader){
+void RestClient:: set_header(String nHeader){
     Header = nHeader;
 }
 
