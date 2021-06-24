@@ -14,7 +14,7 @@ class RestClient{
     private:
         String serverName, serverPath, Header = "", ssid, pass;
         int serverPort;
-        WiFiClient client;
+        WiFiClientSecure client;
 };
 
 #endif
